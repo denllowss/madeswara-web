@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Madeswaraa Official: Instagram | Linktree</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { min-height: 100%; }
+  body {
+    font-family: "Inter", Helvetica, Arial, system-ui, -apple-system, sans-serif;
+    color: #fff;
+    background-color: #000;
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-x: hidden;
+  }
+  /* Webp fallback (direct from CDN) sits behind the video */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: url("https://assets.production.linktr.ee/profiles/_next/static/media/video-frame-desktop.f2c8f96488cada9c.webp");
+    background-size: cover;
+    background-position: center;
+    z-index: -3;
+  }
+  /* Dark overlay for readability */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.55) 100%);
+    z-index: -1;
+  }
+  @media (max-width: 600px) {
+    body::before { background-image: url("https://assets.production.linktr.ee/profiles/_next/static/media/video-frame-mobile.6702572a1865582b.webp"); }
+  }
+
+  /* Background video (direct from CDN, format .mp4) */
+  .bg-video {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -2;
+  }
+  .bg-video.mobile { display: none; }
+  @media (max-width: 600px) {
+    .bg-video.desktop { display: none; }
+    .bg-video.mobile { display: block; }
+  }
+
+  .wrap {
+    width: 100%;
+    max-width: 600px;
+    padding: 56px 20px 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1 0 auto;
+  }
+
+  .avatar-wrap {
+    animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+    will-change: transform, opacity;
+  }
+  .avatar {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #fff;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.45);
+    background: #111;
+    animation: floatY 4.8s ease-in-out 1.1s infinite;
+    will-change: transform;
+  }
+  @keyframes floatY {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50%      { transform: translateY(-7px) scale(1.025); }
+  }
+
+  h1.title {
+    font-family: "Archivo Black", "Arial Black", sans-serif;
+    font-weight: 400;
+    font-size: 1.5rem;
+    line-height: 1.2;
+    text-align: center;
+    margin-top: 16px;
+    color: #fff;
+    animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.12s backwards;
+    will-change: transform, opacity;
+  }
+
+  .links {
+    width: 100%;
+    max-width: 600px;
+    margin-top: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  /* ---- Link button: faithful to Linktree's real markup ---- */
+  .btn {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1px;
+    width: 100%;
+    min-height: 64px;
+    padding: 12px 60px;
+    border-radius: 28px;
+    border: 1px solid #FFFFFF;
+    background: transparent;
+    color: #FFFFFF;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color .25s ease, transform .4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow .25s ease, border-color .25s ease;
+    will-change: transform;
+  }
+  .btn:hover {
+    background: rgba(255,255,255,0.07);
+    transform: translateY(-2px);
+    border-color: rgba(255,255,255,0.95);
+  }
+
+  .thumb {
+    position: absolute;
+    left: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    border-radius: 20px;
+    object-fit: cover;
+    flex-shrink: 0;
+    background: #222;
+  }
+
+  .icon {
+    position: absolute;
+    left: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    background: rgba(255,255,255,0.10);
+    color: #fff;
+  }
+
+  .txt { display: flex; flex-direction: column; line-height: 1.2; min-width: 0; gap: 1px; }
+  .t1 { font-weight: 500; font-size: 16px; }
+  .t2 { font-weight: 400; font-size: 12px; opacity: 0.6; margin-top: 1px; }
+
+  footer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 22px 0 28px;
+    flex-shrink: 0;
+  }
+  footer img { height: 22px; width: auto; opacity: 0.9; }
+
+  /* Entrance animation — extra smooth & seamless */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .links .btn { animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) backwards; }
+  .links .btn:nth-child(1) { animation-delay: 0.26s; }
+  .links .btn:nth-child(2) { animation-delay: 0.34s; }
+  .links .btn:nth-child(3) { animation-delay: 0.42s; }
+  .links .btn:nth-child(4) { animation-delay: 0.50s; }
+  .links .btn:nth-child(5) { animation-delay: 0.58s; }
+  footer { animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.72s backwards; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .avatar-wrap, .avatar, h1.title, .links .btn, footer { animation: none; }
+  }
+</style>
+</head>
+<body>
+  <video class="bg-video desktop" autoplay loop muted playsinline preload="auto" poster="https://assets.production.linktr.ee/profiles/_next/static/media/video-frame-desktop.f2c8f96488cada9c.webp">
+    <source src="https://assets.production.linktr.ee/profile--collab-theme-assets/backgroundVideoDesktop.mp4" type="video/mp4">
+  </video>
+  <video class="bg-video mobile" autoplay loop muted playsinline preload="auto" poster="https://assets.production.linktr.ee/profiles/_next/static/media/video-frame-mobile.6702572a1865582b.webp">
+    <source src="https://assets.production.linktr.ee/profile--collab-theme-assets/backgroundVideoMobile.mp4" type="video/mp4">
+  </video>
+  <main class="wrap">
+    <div class="avatar-wrap"><img class="avatar" src="assets/avatar.jpeg" alt="Madeswaraa Official: Instagram"></div>
+    <h1 class="title">@Madeswaraa</h1>
+    <div class="links">
+<a class="btn" href="https://sociabuzz.com/madeswara/tribe" target="_blank" rel="noopener noreferrer" aria-label="Support | Donate"><img class="thumb" src="assets/thumb_support.jpeg" alt=""><span class="txt"><span class="t1">Support | Donate</span></span></a>
+<a class="btn" href="https://chat.whatsapp.com/KaBA9GrlNMJEljs16TEVHY?s=cl&p=a&ilr=4&amv=0" target="_blank" rel="noopener noreferrer" aria-label="Mades Network"><img class="thumb" src="assets/thumb_network.jpg" alt=""><span class="txt"><span class="t1">Mades Network</span><span class="t2">WhatsApp Community • Free to join</span></span></a>
+<a class="btn" href="https://hwww.youtube.com/@madeswara" target="_blank" rel="noopener noreferrer" aria-label="Subscribe Madeswara"><img class="thumb" src="assets/thumb_subscribe.jpeg" alt=""><span class="txt"><span class="t1">Subscribe Madeswara</span></span></a>
+<a class="btn" href="https://www.instagram.com/clamoursz?igsh=MWp1MWoxb3kyMzEycQ==" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><span class="icon"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></span><span class="txt"><span class="t1">Instagram</span></span></a>
+<a class="btn" href="https://youtube.com/@madeswara?si=WhE2-eu-Fq5sS6CJ" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><span class="icon"><svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31.3 31.3 0 0 0 0 12a31.3 31.3 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.3 31.3 0 0 0 24 12a31.3 31.3 0 0 0-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z"></path></svg></span><span class="txt"><span class="t1">YouTube</span><span class="t2">@Madeswaraa</span></span></a>
+    </div>
+  </main>
+  <footer>
+    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDkiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCA2NCAyNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTM0LjE2ODEgNi4wOTUyNEM0MC42Njk1IDYuMDk1MjQgNDcuMTcxMyA2LjA5NTI0IDUzLjY3MjcgNi4wOTUyNEM1My44MjEzIDYuMDk1MjQgNTMuOTY5OCA2LjA5NTI0IDU0LjExOCA2LjA5OTU1QzU1LjQxNDggNi4xMzg2NyA1Ni43MjEyIDcuMDU5NDUgNTcuMDc1IDguNTI1MzJDNTcuNTIzMyAxMC4zODMxIDU2LjM2MTQgMTIuMDEwNSA1NC43NjU5IDEyLjQxOTZDNTQuNTUwMSAxMi40NzUgNTQuMzMxNiAxMi41MTY4IDU0LjEwNzEgMTIuNTE3NEM1My45NDc5IDEyLjUxNzggNTMuNzg5MSAxMi41MjE3IDUzLjYzIDEyLjUyMTdDNDcuMjg3MyAxMi41MjE3IDQwLjk0NSAxMi41MjE3IDM0LjYwMjQgMTIuNTIyMUMzNC40NzUxIDEyLjUyMjEgMzQuMzQ4MSAxMi41MjUxIDM0LjIyMDggMTIuNTI4MUMzNC4xNDg1IDEyLjUyOTcgMzQuMTAzNCAxMi41NzM4IDM0LjA3NzUgMTIuNjM1OEMzMy45ODI0IDEyLjg2MjkgMzMuOTg1IDEzLjA4OTEgMzQuMDkyNSAxMy4zMTIyQzM0LjEyMjYgMTMuMzc0OSAzNC4xNzI0IDEzLjQwOTQgMzQuMjQxIDEzLjQxNTNDMzQuMjgzMSAxMy40MTkgMzQuMzI1NiAxMy40MiAzNC4zNjggMTMuNDJDMzQuNDc0MSAxMy40MjA2IDM0LjU4MDIgMTMuNDIwMyAzNC42ODYzIDEzLjQyMDNDNDIuOTgwMiAxMy40MjAzIDUxLjI3NDUgMTMuNDIwMyA1OS41Njg0IDEzLjQyMDNDNTkuNjk1NyAxMy40MjAzIDU5LjgyMzEgMTMuNDIwMyA1OS45NTA0IDEzLjQyMDZDNjEuMDkzMyAxMy40MjI2IDYyLjMxOTggMTQuMTEwMyA2Mi44NTU5IDE1LjM5NzVDNjMuMDcxNSAxNS45MTUgNjMuMTM5MSAxNi40NTM5IDYzLjA3ODQgMTcuMDE2NUM2Mi45NTMxIDE4LjE4MyA2Mi4wOTMgMTkuMzY4NCA2MC43MjcyIDE5LjczNjFDNjAuNTAxNCAxOS43OTY4IDYwLjI3MjcgMTkuODQwMiA2MC4wMzc2IDE5Ljg0MDVDNTkuODY3OCAxOS44NDA5IDU5LjY5ODQgMTkuODQ1MiA1OS41Mjg2IDE5Ljg0NTJDNDYuOTQ5OCAxOS44NDUyIDM0LjM3MDcgMTkuODQ1MiAyMS43OTE4IDE5Ljg0NTJDMjEuNjY0NSAxOS44NDUyIDIxLjUzNzIgMTkuODQ2MiAyMS40MDk5IDE5Ljg0NThDMjEuMzM0NiAxOS44NDU4IDIxLjI2MyAxOS44NTkxIDIxLjE5MzQgMTkuODg4NkMyMS4wNjA3IDE5Ljk0NSAyMC45ODg0IDIwLjA4NjIgMjEuMDI0MiAyMC4yMjcxQzIxLjA3MzcgMjAuNDIxOCAyMS4xOTczIDIwLjUzODUgMjEuMzk1OSAyMC41NzE2QzIxLjQ1ODMgMjAuNTgxOSAyMS41MjI2IDIwLjU4NDkgMjEuNTg1OSAyMC41ODY2QzIxLjY5MiAyMC41ODg5IDIxLjc5ODEgMjAuNTg3OSAyMS45MDQyIDIwLjU4NzlDMjYuMTE0OSAyMC41ODc5IDMwLjMyNTUgMjAuNTg3OSAzNC41MzYxIDIwLjU4ODVDMzQuNzA1NSAyMC41ODg1IDM0Ljg3NTMgMjAuNTkzOSAzNS4wNDQ0IDIwLjYwNDFDMzUuOTA5NSAyMC42NTUyIDM2LjkzNzcgMjEuMjgyMiAzNy4yODU4IDIyLjQ0OUMzNy43MDc2IDIzLjg2MjggMzYuODQ5MSAyNS40MTYyIDM1LjI5MjggMjUuNzM0NUMzNS4xOTk5IDI1Ljc1MzQgMzUuMTAzNCAyNS43NTc3IDM1LjAwODMgMjUuNzYyMUMzNC45MDI1IDI1Ljc2NyAzNC43OTYxIDI1Ljc2NDcgMzQuNjkwMyAyNS43NjQ3QzI5LjU2NzUgMjUuNzY0NyAyNC40NDQ3IDI1Ljc2NDcgMTkuMzIyIDI1Ljc2NDdDMTkuMzExNCAyNS43NjQ3IDE5LjMwMDcgMjUuNzY0NyAxOS4yOTAxIDI1Ljc2NDdDMTguMzI0MyAyNS43ODAzIDE3LjM5MTkgMjUuNTk3MyAxNi40ODY0IDI1LjI3M0MxNC4xODQzIDI0LjQ0OSAxMi4zNTkzIDIyLjcyOTUgMTEuNDA5NyAyMC40Nzc1QzEwLjg3ODggMTkuMjE3OCAxMC4zNjcyIDE3Ljk0OTkgOS44NDY5OCAxNi42ODZDOC42MTY4NSAxMy42OTcyIDcuMzg2NzIgMTAuNzA4NCA2LjE1NjU5IDcuNzE5NjFDNS45ODcxNiA3LjMwODEzIDUuODIxMDQgNi44OTQ5OSA1LjY0ODk2IDYuNDg0NUM1LjQ3OTg2IDYuMDgwOTggNS4zNjI0OCA1LjY2MjU0IDUuMzEzNDEgNS4yMjkxN0M1LjI2NTY2IDQuODA3MDggNS4yNjkzMSA0LjM4NDMzIDUuMzM2MjkgMy45NjEyNUM1LjQzNzQyIDMuMzIzMyA1LjY1MzkzIDIuNzMwMTIgNi4wMDE3NSAyLjE4OEM2LjcyNDkxIDEuMDYwMzMgNy43NDQ4MiAwLjM1NTQxIDkuMDU3ODQgMC4wODQ1MTY0QzkuMzM3NjkgMC4wMjY4MjI5IDkuNjIzMTcgLTAuMDAzMzQ5NDkgOS45MTEzMSAwLjAwMDI5NzM0NEMxMC4yNjExIDAuMDA0OTM5ODIgMTAuNjExMyAwLjAwMTI5MTA0IDEwLjk2MTEgMC4wMDEyOTEwM0MxNi40MjM0IDAuMDAxMjkwNzkgMjEuODg1MyAwLjAwMTI5MDU1IDI3LjM0NzYgMC4wMDEyOTAzMUMyNy40NDMxIDAuMDAxMjkwMzEgMjcuNTM4NiAwLjAwMDk2MDMzMSAyNy42MzQxIDAuMDAxOTU0MDZDMjguNzUzMiAwLjAxMjg5NjUgMjkuODY2NiAwLjc3NzE2OSAzMC4xMzE4IDIuMDYyMzRDMzAuNDI4OSAzLjUwMjM1IDI5LjUzOCA0Ljc2NDY0IDI4LjI2MTggNS4xMDg4MUMyOC4wNjc1IDUuMTYxMiAyNy44Njg1IDUuMTk2NjggMjcuNjY1MyA1LjE5NTY5QzI3LjUzOCA1LjE5NTAyIDI3LjQxMDYgNS4xOTczNCAyNy4yODM3IDUuMTk3MzRDMjIuODM5NiA1LjE5NzM0IDE4LjM5NTYgNS4xOTczNSAxMy45NTE4IDUuMTk3NjhDMTMuODI0NSA1LjE5NzY4IDEzLjY5NzUgNS4yIDEzLjU3MDIgNS4yMDQ2NEMxMy41MTI1IDUuMjA2NjMgMTMuNDcxNyA1LjI0MzQzIDEzLjQ0MzkgNS4yOTAxOEMxMy4zMDI5IDUuNTI4NTggMTMuMzk2OCA1Ljc4NjU1IDEzLjU1NzYgNS45MjI0OUMxMy42ODQzIDYuMDI5MjYgMTMuODMyOCA2LjA4MDMyIDEzLjk5NTMgNi4wOTAyNkMxNC4xMTE3IDYuMDk3MjMgMTQuMjI4NCA2LjA5MzkxIDE0LjM0NTEgNi4wOTM5MUMxNy42NjQ4IDYuMDkzOTEgMjAuOTg0NSA2LjA5MzkxIDI0LjMwNDIgNi4wOTM5MUwzNC4xNjc3IDYuMDkzOTFMMzQuMTY4MSA2LjA5NTI0WiIgZmlsbD0id2hpdGUiLz4KPHBhdGggZD0iTTAuMzgwMzExIDE3LjgxNEMwLjM0NzQ4NiAxNS42MzUyIDIuMTEyMTEgMTMuNDI0MyA0LjgyMjA0IDEzLjM4NDJDNy40MzU0OCAxMy40MTU0IDkuMjk0NiAxNS41MTk5IDkuMjc5NjggMTcuODdDOS4yNjUwOSAyMC4yMDUzIDcuNDAzOTggMjIuMjY4MyA0LjgyOTMzIDIyLjI5ODhDMi4xMjYzNyAyMi4yNjgzIDAuMzIxMjkyIDIwLjA0NzggMC4zODAzMTEgMTcuODE0WiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+Cg==" alt="Linktree">
+  </footer>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a3459e0a2e3155c9',t:'MTc4ODI3OTc4NA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

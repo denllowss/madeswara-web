@@ -8,7 +8,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-user-select: none; -ms-user-select: none; user-select: none; -webkit-touch-callout: none; }
+  img { -webkit-user-drag: none; user-drag: none; }
   html, body { min-height: 100%; }
   body {
     font-family: "Inter", Helvetica, Arial, system-ui, -apple-system, sans-serif;
@@ -16,6 +17,7 @@
     background-color: #000;
     position: relative;
     min-height: 100vh;
+    min-height: 100dvh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -61,7 +63,7 @@
   .wrap {
     width: 100%;
     max-width: 600px;
-    padding: 56px 20px 32px;
+    padding: clamp(40px, 8vw, 56px) 20px 32px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -91,7 +93,7 @@
   h1.title {
     font-family: "Archivo Black", "Arial Black", sans-serif;
     font-weight: 400;
-    font-size: 1.5rem;
+    font-size: clamp(1.35rem, 6vw, 1.6rem);
     line-height: 1.2;
     text-align: center;
     margin-top: 16px;
@@ -119,7 +121,7 @@
     gap: 1px;
     width: 100%;
     min-height: 64px;
-    padding: 12px 60px;
+    padding: 12px clamp(58px, 14vw, 60px);
     border-radius: 28px;
     border: 1px solid #FFFFFF;
     background: transparent;
@@ -165,8 +167,34 @@
   }
 
   .txt { display: flex; flex-direction: column; line-height: 1.2; min-width: 0; gap: 1px; }
-  .t1 { font-weight: 500; font-size: 16px; }
+  .t1 { font-weight: 500; font-size: clamp(14px, 4vw, 16px); }
   .t2 { font-weight: 400; font-size: 12px; opacity: 0.6; margin-top: 1px; }
+
+  /* Share button (top-right of each link) */
+  .share-btn {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: #fff;
+    opacity: 0.5;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background-color .2s ease, opacity .2s ease;
+  }
+  .share-btn:hover {
+    background: rgba(0,0,0,0.25);
+    opacity: 1;
+  }
+  .share-btn svg { width: 16px; height: 16px; display: block; }
 
   footer {
     width: 100%;
@@ -176,6 +204,8 @@
     flex-shrink: 0;
   }
   footer img { height: 22px; width: auto; opacity: 0.9; }
+  .footer-inner { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+  .credit { font-size: 12px; color: rgba(255,255,255,0.5); text-align: center; letter-spacing: 0.2px; }
 
   /* Entrance animation — extra smooth & seamless */
   @keyframes fadeUp {
@@ -189,6 +219,24 @@
   .links .btn:nth-child(4) { animation-delay: 0.50s; }
   .links .btn:nth-child(5) { animation-delay: 0.58s; }
   footer { animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.72s backwards; }
+
+  /* ---- Responsive: small phones ---- */
+  @media (max-width: 380px) {
+    .links { gap: 12px; }
+    .btn { padding: 11px 56px; min-height: 60px; }
+    .t2 { font-size: 11px; }
+    .thumb, .icon { width: 44px; height: 44px; border-radius: 18px; }
+    .icon { border-radius: 50%; }
+    .share-btn { right: 8px; }
+  }
+  /* ---- Responsive: tablets & large desktops ---- */
+  @media (min-width: 768px) {
+    .wrap { padding-top: 72px; }
+    .links { margin-top: 32px; }
+  }
+  @media (min-width: 1024px) {
+    .wrap { padding-top: 88px; }
+  }
 
   @media (prefers-reduced-motion: reduce) {
     .avatar-wrap, .avatar, h1.title, .links .btn, footer { animation: none; }
@@ -206,15 +254,40 @@
     <div class="avatar-wrap"><img class="avatar" src="https://ugc.production.linktr.ee/03e299f2-7606-40e9-baa5-953aa2fc22e8_1000512704.jpeg?io=true&size=avatar-v3_0" alt="Madeswaraa Official: Instagram"></div>
     <h1 class="title">@Madeswaraa</h1>
     <div class="links">
-<a class="btn" href="https://sociabuzz.com/madeswara/tribe" target="_blank" rel="noopener noreferrer" aria-label="Support | Donate"><img class="thumb" src="https://ugc.production.linktr.ee/2353bbca-6912-4edf-a3af-5959f0494ced_1000518122.jpeg?io=true&size=thumbnail-stack_v1_0" alt=""><span class="txt"><span class="t1">Support | Donate</span></span></a>
-<a class="btn" href="https://chat.whatsapp.com/KaBA9GrlNMJEljs16TEVHY?s=cl&p=a&ilr=4&amv=0" target="_blank" rel="noopener noreferrer" aria-label="Mades Network"><img class="thumb" src="https://ugc.production.linktr.ee/a2eea79b-e5c7-47e6-b6a9-c95d8e4a76ab_1000011211.png?io=true&size=thumbnail-stack_v1_0" alt=""><span class="txt"><span class="t1">Mades Network</span><span class="t2">WhatsApp Community • Free to join</span></span></a>
-<a class="btn" href="https://hwww.youtube.com/@madeswara" target="_blank" rel="noopener noreferrer" aria-label="Subscribe Madeswara"><img class="thumb" src="https://ugc.production.linktr.ee/6e686352-0fbd-4365-8c1c-40ca993e4567_0Pv0N-qYTm70yf-7iRjD8eeDxOmswyEOgGa0TdlVuE05pWTKUZ2wK1lNHkOaeO-i1ZSpbMZ88g-s900-c-k-c0x00ffffff-no-r.jpeg?io=true&size=thumbnail-stack_v1_0" alt=""><span class="txt"><span class="t1">Subscribe Madeswara</span></span></a>
-<a class="btn" href="https://www.instagram.com/clamoursz?igsh=MWp1MWoxb3kyMzEycQ==" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><span class="icon"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></span><span class="txt"><span class="t1">Instagram</span></span></a>
-<a class="btn" href="https://youtube.com/@madeswara?si=WhE2-eu-Fq5sS6CJ" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><span class="icon"><svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31.3 31.3 0 0 0 0 12a31.3 31.3 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.3 31.3 0 0 0 24 12a31.3 31.3 0 0 0-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z"></path></svg></span><span class="txt"><span class="t1">YouTube</span><span class="t2">@Madeswaraa</span></span></a>
+<a class="btn" href="https://sociabuzz.com/madeswara/tribe" target="_blank" rel="noopener noreferrer" aria-label="Support | Donate"><img class="thumb" src="https://ugc.production.linktr.ee/2353bbca-6912-4edf-a3af-5959f0494ced_1000518122.jpeg?io=true&size=thumbnail-stack_v1_0" alt=""><span class="txt"><span class="t1">Support | Donate</span></span><button class="share-btn" type="button" aria-label="Share Support | Donate"><svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor" aria-hidden="true"><circle cx="8" cy="4" r="1.7"/><circle cx="8" cy="8" r="1.7"/><circle cx="8" cy="12" r="1.7"/></svg></button></a>
+<a class="btn" href="https://chat.whatsapp.com/KaBA9GrlNMJEljs16TEVHY?s=cl&p=a&ilr=4&amv=0" target="_blank" rel="noopener noreferrer" aria-label="Mades Network"><img class="thumb" src="https://ugc.production.linktr.ee/a2eea79b-e5c7-47e6-b6a9-c95d8e4a76ab_1000011211.png?io=true&size=thumbnail-stack_v1_0" alt=""><span class="txt"><span class="t1">Mades Network</span><span class="t2">WhatsApp Community • Free to join</span></span><button class="share-btn" type="button" aria-label="Share Mades Network"><svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor" aria-hidden="true"><circle cx="8" cy="4" r="1.7"/><circle cx="8" cy="8" r="1.7"/><circle cx="8" cy="12" r="1.7"/></svg></button></a>
+<a class="btn" href="https://hwww.youtube.com/@madeswara" target="_blank" rel="noopener noreferrer" aria-label="Subscribe Madeswara"><img class="thumb" src="https://ugc.production.linktr.ee/6e686352-0fbd-4365-8c1c-40ca993e4567_0Pv0N-qYTm70yf-7iRjD8eeDxOmswyEOgGa0TdlVuE05pWTKUZ2wK1lNHkOaeO-i1ZSpbMZ88g-s900-c-k-c0x00ffffff-no-r.jpeg?io=true&size=thumbnail-stack_v1_0" alt=""><span class="txt"><span class="t1">Subscribe Madeswara</span></span><button class="share-btn" type="button" aria-label="Share Subscribe Madeswara"><svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor" aria-hidden="true"><circle cx="8" cy="4" r="1.7"/><circle cx="8" cy="8" r="1.7"/><circle cx="8" cy="12" r="1.7"/></svg></button></a>
+<a class="btn" href="https://www.instagram.com/clamoursz?igsh=MWp1MWoxb3kyMzEycQ==" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><span class="icon"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></span><span class="txt"><span class="t1">Instagram</span></span><button class="share-btn" type="button" aria-label="Share Instagram"><svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor" aria-hidden="true"><circle cx="8" cy="4" r="1.7"/><circle cx="8" cy="8" r="1.7"/><circle cx="8" cy="12" r="1.7"/></svg></button></a>
+<a class="btn" href="https://youtube.com/@madeswara?si=WhE2-eu-Fq5sS6CJ" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><span class="icon"><svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31.3 31.3 0 0 0 0 12a31.3 31.3 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.3 31.3 0 0 0 24 12a31.3 31.3 0 0 0-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z"></path></svg></span><span class="txt"><span class="t1">YouTube</span><span class="t2">@Madeswaraa</span></span><button class="share-btn" type="button" aria-label="Share YouTube"><svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor" aria-hidden="true"><circle cx="8" cy="4" r="1.7"/><circle cx="8" cy="8" r="1.7"/><circle cx="8" cy="12" r="1.7"/></svg></button></a>
     </div>
   </main>
   <footer>
-    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDkiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCA2NCAyNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTM0LjE2ODEgNi4wOTUyNEM0MC42Njk1IDYuMDk1MjQgNDcuMTcxMyA2LjA5NTI0IDUzLjY3MjcgNi4wOTUyNEM1My44MjEzIDYuMDk1MjQgNTMuOTY5OCA2LjA5NTI0IDU0LjExOCA2LjA5OTU1QzU1LjQxNDggNi4xMzg2NyA1Ni43MjEyIDcuMDU5NDUgNTcuMDc1IDguNTI1MzJDNTcuNTIzMyAxMC4zODMxIDU2LjM2MTQgMTIuMDEwNSA1NC43NjU5IDEyLjQxOTZDNTQuNTUwMSAxMi40NzUgNTQuMzMxNiAxMi41MTY4IDU0LjEwNzEgMTIuNTE3NEM1My45NDc5IDEyLjUxNzggNTMuNzg5MSAxMi41MjE3IDUzLjYzIDEyLjUyMTdDNDcuMjg3MyAxMi41MjE3IDQwLjk0NSAxMi41MjE3IDM0LjYwMjQgMTIuNTIyMUMzNC40NzUxIDEyLjUyMjEgMzQuMzQ4MSAxMi41MjUxIDM0LjIyMDggMTIuNTI4MUMzNC4xNDg1IDEyLjUyOTcgMzQuMTAzNCAxMi41NzM4IDM0LjA3NzUgMTIuNjM1OEMzMy45ODI0IDEyLjg2MjkgMzMuOTg1IDEzLjA4OTEgMzQuMDkyNSAxMy4zMTIyQzM0LjEyMjYgMTMuMzc0OSAzNC4xNzI0IDEzLjQwOTQgMzQuMjQxIDEzLjQxNTNDMzQuMjgzMSAxMy40MTkgMzQuMzI1NiAxMy40MiAzNC4zNjggMTMuNDJDMzQuNDc0MSAxMy40MjA2IDM0LjU4MDIgMTMuNDIwMyAzNC42ODYzIDEzLjQyMDNDNDIuOTgwMiAxMy40MjAzIDUxLjI3NDUgMTMuNDIwMyA1OS41Njg0IDEzLjQyMDNDNTkuNjk1NyAxMy40MjAzIDU5LjgyMzEgMTMuNDIwMyA1OS45NTA0IDEzLjQyMDZDNjEuMDkzMyAxMy40MjI2IDYyLjMxOTggMTQuMTEwMyA2Mi44NTU5IDE1LjM5NzVDNjMuMDcxNSAxNS45MTUgNjMuMTM5MSAxNi40NTM5IDYzLjA3ODQgMTcuMDE2NUM2Mi45NTMxIDE4LjE4MyA2Mi4wOTMgMTkuMzY4NCA2MC43MjcyIDE5LjczNjFDNjAuNTAxNCAxOS43OTY4IDYwLjI3MjcgMTkuODQwMiA2MC4wMzc2IDE5Ljg0MDVDNTkuODY3OCAxOS44NDA5IDU5LjY5ODQgMTkuODQ1MiA1OS41Mjg2IDE5Ljg0NTJDNDYuOTQ5OCAxOS44NDUyIDM0LjM3MDcgMTkuODQ1MiAyMS43OTE4IDE5Ljg0NTJDMjEuNjY0NSAxOS44NDUyIDIxLjUzNzIgMTkuODQ2MiAyMS40MDk5IDE5Ljg0NThDMjEuMzM0NiAxOS44NDU4IDIxLjI2MyAxOS44NTkxIDIxLjE5MzQgMTkuODg4NkMyMS4wNjA3IDE5Ljk0NSAyMC45ODg0IDIwLjA4NjIgMjEuMDI0MiAyMC4yMjcxQzIxLjA3MzcgMjAuNDIxOCAyMS4xOTczIDIwLjUzODUgMjEuMzk1OSAyMC41NzE2QzIxLjQ1ODMgMjAuNTgxOSAyMS41MjI2IDIwLjU4NDkgMjEuNTg1OSAyMC41ODY2QzIxLjY5MiAyMC41ODg5IDIxLjc5ODEgMjAuNTg3OSAyMS45MDQyIDIwLjU4NzlDMjYuMTE0OSAyMC41ODc5IDMwLjMyNTUgMjAuNTg3OSAzNC41MzYxIDIwLjU4ODVDMzQuNzA1NSAyMC41ODg1IDM0Ljg3NTMgMjAuNTkzOSAzNS4wNDQ0IDIwLjYwNDFDMzUuOTA5NSAyMC42NTUyIDM2LjkzNzcgMjEuMjgyMiAzNy4yODU4IDIyLjQ0OUMzNy43MDc2IDIzLjg2MjggMzYuODQ5MSAyNS40MTYyIDM1LjI5MjggMjUuNzM0NUMzNS4xOTk5IDI1Ljc1MzQgMzUuMTAzNCAyNS43NTc3IDM1LjAwODMgMjUuNzYyMUMzNC45MDI1IDI1Ljc2NyAzNC43OTYxIDI1Ljc2NDcgMzQuNjkwMyAyNS43NjQ3QzI5LjU2NzUgMjUuNzY0NyAyNC40NDQ3IDI1Ljc2NDcgMTkuMzIyIDI1Ljc2NDdDMTkuMzExNCAyNS43NjQ3IDE5LjMwMDcgMjUuNzY0NyAxOS4yOTAxIDI1Ljc2NDdDMTguMzI0MyAyNS43ODAzIDE3LjM5MTkgMjUuNTk3MyAxNi40ODY0IDI1LjI3M0MxNC4xODQzIDI0LjQ0OSAxMi4zNTkzIDIyLjcyOTUgMTEuNDA5NyAyMC40Nzc1QzEwLjg3ODggMTkuMjE3OCAxMC4zNjcyIDE3Ljk0OTkgOS44NDY5OCAxNi42ODZDOC42MTY4NSAxMy42OTcyIDcuMzg2NzIgMTAuNzA4NCA2LjE1NjU5IDcuNzE5NjFDNS45ODcxNiA3LjMwODEzIDUuODIxMDQgNi44OTQ5OSA1LjY0ODk2IDYuNDg0NUM1LjQ3OTg2IDYuMDgwOTggNS4zNjI0OCA1LjY2MjU0IDUuMzEzNDEgNS4yMjkxN0M1LjI2NTY2IDQuODA3MDggNS4yNjkzMSA0LjM4NDMzIDUuMzM2MjkgMy45NjEyNUM1LjQzNzQyIDMuMzIzMyA1LjY1MzkzIDIuNzMwMTIgNi4wMDE3NSAyLjE4OEM2LjcyNDkxIDEuMDYwMzMgNy43NDQ4MiAwLjM1NTQxIDkuMDU3ODQgMC4wODQ1MTY0QzkuMzM3NjkgMC4wMjY4MjI5IDkuNjIzMTcgLTAuMDAzMzQ5NDkgOS45MTEzMSAwLjAwMDI5NzM0NEMxMC4yNjExIDAuMDA0OTM5ODIgMTAuNjExMyAwLjAwMTI5MTA0IDEwLjk2MTEgMC4wMDEyOTEwM0MxNi40MjM0IDAuMDAxMjkwNzkgMjEuODg1MyAwLjAwMTI5MDU1IDI3LjM0NzYgMC4wMDEyOTAzMUMyNy40NDMxIDAuMDAxMjkwMzEgMjcuNTM4NiAwLjAwMDk2MDMzMSAyNy42MzQxIDAuMDAxOTU0MDZDMjguNzUzMiAwLjAxMjg5NjUgMjkuODY2NiAwLjc3NzE2OSAzMC4xMzE4IDIuMDYyMzRDMzAuNDI4OSAzLjUwMjM1IDI5LjUzOCA0Ljc2NDY0IDI4LjI2MTggNS4xMDg4MUMyOC4wNjc1IDUuMTYxMiAyNy44Njg1IDUuMTk2NjggMjcuNjY1MyA1LjE5NTY5QzI3LjUzOCA1LjE5NTAyIDI3LjQxMDYgNS4xOTczNCAyNy4yODM3IDUuMTk3MzRDMjIuODM5NiA1LjE5NzM0IDE4LjM5NTYgNS4xOTczNSAxMy45NTE4IDUuMTk3NjhDMTMuODI0NSA1LjE5NzY4IDEzLjY5NzUgNS4yIDEzLjU3MDIgNS4yMDQ2NEMxMy41MTI1IDUuMjA2NjMgMTMuNDcxNyA1LjI0MzQzIDEzLjQ0MzkgNS4yOTAxOEMxMy4zMDI5IDUuNTI4NTggMTMuMzk2OCA1Ljc4NjU1IDEzLjU1NzYgNS45MjI0OUMxMy42ODQzIDYuMDI5MjYgMTMuODMyOCA2LjA4MDMyIDEzLjk5NTMgNi4wOTAyNkMxNC4xMTE3IDYuMDk3MjMgMTQuMjI4NCA2LjA5MzkxIDE0LjM0NTEgNi4wOTM5MUMxNy42NjQ4IDYuMDkzOTEgMjAuOTg0NSA2LjA5MzkxIDI0LjMwNDIgNi4wOTM5MUwzNC4xNjc3IDYuMDkzOTFMMzQuMTY4MSA2LjA5NTI0WiIgZmlsbD0id2hpdGUiLz4KPHBhdGggZD0iTTAuMzgwMzExIDE3LjgxNEMwLjM0NzQ4NiAxNS42MzUyIDIuMTEyMTEgMTMuNDI0MyA0LjgyMjA0IDEzLjM4NDJDNy40MzU0OCAxMy40MTU0IDkuMjk0NiAxNS41MTk5IDkuMjc5NjggMTcuODdDOS4yNjUwOSAyMC4yMDUzIDcuNDAzOTggMjIuMjY4MyA0LjgyOTMzIDIyLjI5ODhDMi4xMjYzNyAyMi4yNjgzIDAuMzIxMjkyIDIwLjA0NzggMC4zODAzMTEgMTcuODE0WiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+Cg==" alt="Linktree">
+    <div class="footer-inner">
+      <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDkiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCA2NCAyNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTM0LjE2ODEgNi4wOTUyNEM0MC42Njk1IDYuMDk1MjQgNDcuMTcxMyA2LjA5NTI0IDUzLjY3MjcgNi4wOTUyNEM1My44MjEzIDYuMDk1MjQgNTMuOTY5OCA2LjA5NTI0IDU0LjExOCA2LjA5OTU1QzU1LjQxNDggNi4xMzg2NyA1Ni43MjEyIDcuMDU5NDUgNTcuMDc1IDguNTI1MzJDNTcuNTIzMyAxMC4zODMxIDU2LjM2MTQgMTIuMDEwNSA1NC43NjU5IDEyLjQxOTZDNTQuNTUwMSAxMi40NzUgNTQuMzMxNiAxMi41MTY4IDU0LjEwNzEgMTIuNTE3NEM1My45NDc5IDEyLjUxNzggNTMuNzg5MSAxMi41MjE3IDUzLjYzIDEyLjUyMTdDNDcuMjg3MyAxMi41MjE3IDQwLjk0NSAxMi41MjE3IDM0LjYwMjQgMTIuNTIyMUMzNC40NzUxIDEyLjUyMjEgMzQuMzQ4MSAxMi41MjUxIDM0LjIyMDggMTIuNTI4MUMzNC4xNDg1IDEyLjUyOTcgMzQuMTAzNCAxMi41NzM4IDM0LjA3NzUgMTIuNjM1OEMzMy45ODI0IDEyLjg2MjkgMzMuOTg1IDEzLjA4OTEgMzQuMDkyNSAxMy4zMTIyQzM0LjEyMjYgMTMuMzc0OSAzNC4xNzI0IDEzLjQwOTQgMzQuMjQxIDEzLjQxNTNDMzQuMjgzMSAxMy40MTkgMzQuMzI1NiAxMy40MiAzNC4zNjggMTMuNDJDMzQuNDc0MSAxMy40MjA2IDM0LjU4MDIgMTMuNDIwMyAzNC42ODYzIDEzLjQyMDNDNDIuOTgwMiAxMy40MjAzIDUxLjI3NDUgMTMuNDIwMyA1OS41Njg0IDEzLjQyMDNDNTkuNjk1NyAxMy40MjAzIDU5LjgyMzEgMTMuNDIwMyA1OS45NTA0IDEzLjQyMDZDNjEuMDkzMyAxMy40MjI2IDYyLjMxOTggMTQuMTEwMyA2Mi44NTU5IDE1LjM5NzVDNjMuMDcxNSAxNS45MTUgNjMuMTM5MSAxNi40NTM5IDYzLjA3ODQgMTcuMDE2NUM2Mi45NTMxIDE4LjE4MyA2Mi4wOTMgMTkuMzY4NCA2MC43MjcyIDE5LjczNjFDNjAuNTAxNCAxOS43OTY4IDYwLjI3MjcgMTkuODQwMiA2MC4wMzc2IDE5Ljg0MDVDNTkuODY3OCAxOS44NDA5IDU5LjY5ODQgMTkuODQ1MiA1OS41Mjg2IDE5Ljg0NTJDNDYuOTQ5OCAxOS44NDUyIDM0LjM3MDcgMTkuODQ1MiAyMS43OTE4IDE5Ljg0NTJDMjEuNjY0NSAxOS44NDUyIDIxLjUzNzIgMTkuODQ2MiAyMS40MDk5IDE5Ljg0NThDMjEuMzM0NiAxOS44NDU4IDIxLjI2MyAxOS44NTkxIDIxLjE5MzQgMTkuODg4NkMyMS4wNjA3IDE5Ljk0NSAyMC45ODg0IDIwLjA4NjIgMjEuMDI0MiAyMC4yMjcxQzIxLjA3MzcgMjAuNDIxOCAyMS4xOTczIDIwLjUzODUgMjEuMzk1OSAyMC41NzE2QzIxLjQ1ODMgMjAuNTgxOSAyMS41MjI2IDIwLjU4NDkgMjEuNTg1OSAyMC41ODY2QzIxLjY5MiAyMC41ODg5IDIxLjc5ODEgMjAuNTg3OSAyMS45MDQyIDIwLjU4NzlDMjYuMTE0OSAyMC41ODc5IDMwLjMyNTUgMjAuNTg3OSAzNC41MzYxIDIwLjU4ODVDMzQuNzA1NSAyMC41ODg1IDM0Ljg3NTMgMjAuNTkzOSAzNS4wNDQ0IDIwLjYwNDFDMzUuOTA5NSAyMC42NTUyIDM2LjkzNzcgMjEuMjgyMiAzNy4yODU4IDIyLjQ0OUMzNy43MDc2IDIzLjg2MjggMzYuODQ5MSAyNS40MTYyIDM1LjI5MjggMjUuNzM0NUMzNS4xOTk5IDI1Ljc1MzQgMzUuMTAzNCAyNS43NTc3IDM1LjAwODMgMjUuNzYyMUMzNC45MDI1IDI1Ljc2NyAzNC43OTYxIDI1Ljc2NDcgMzQuNjkwMyAyNS43NjQ3QzI5LjU2NzUgMjUuNzY0NyAyNC40NDQ3IDI1Ljc2NDcgMTkuMzIyIDI1Ljc2NDdDMTkuMzExNCAyNS43NjQ3IDE5LjMwMDcgMjUuNzY0NyAxOS4yOTAxIDI1Ljc2NDdDMTguMzI0MyAyNS43ODAzIDE3LjM5MTkgMjUuNTk3MyAxNi40ODY0IDI1LjI3M0MxNC4xODQzIDI0LjQ0OSAxMi4zNTkzIDIyLjcyOTUgMTEuNDA5NyAyMC40Nzc1QzEwLjg3ODggMTkuMjE3OCAxMC4zNjcyIDE3Ljk0OTkgOS44NDY5OCAxNi42ODZDOC42MTY4NSAxMy42OTcyIDcuMzg2NzIgMTAuNzA4NCA2LjE1NjU5IDcuNzE5NjFDNS45ODcxNiA3LjMwODEzIDUuODIxMDQgNi44OTQ5OSA1LjY0ODk2IDYuNDg0NUM1LjQ3OTg2IDYuMDgwOTggNS4zNjI0OCA1LjY2MjU0IDUuMzEzNDEgNS4yMjkxN0M1LjI2NTY2IDQuODA3MDggNS4yNjkzMSA0LjM4NDMzIDUuMzM2MjkgMy45NjEyNUM1LjQzNzQyIDMuMzIzMyA1LjY1MzkzIDIuNzMwMTIgNi4wMDE3NSAyLjE4OEM2LjcyNDkxIDEuMDYwMzMgNy43NDQ4MiAwLjM1NTQxIDkuMDU3ODQgMC4wODQ1MTY0QzkuMzM3NjkgMC4wMjY4MjI5IDkuNjIzMTcgLTAuMDAzMzQ5NDkgOS45MTEzMSAwLjAwMDI5NzM0NEMxMC4yNjExIDAuMDA0OTM5ODIgMTAuNjExMyAwLjAwMTI5MTA0IDEwLjk2MTEgMC4wMDEyOTEwM0MxNi40MjM0IDAuMDAxMjkwNzkgMjEuODg1MyAwLjAwMTI5MDU1IDI3LjM0NzYgMC4wMDEyOTAzMUMyNy40NDMxIDAuMDAxMjkwMzEgMjcuNTM4NiAwLjAwMDk2MDMzMSAyNy42MzQxIDAuMDAxOTU0MDZDMjguNzUzMiAwLjAxMjg5NjUgMjkuODY2NiAwLjc3NzE2OSAzMC4xMzE4IDIuMDYyMzRDMzAuNDI4OSAzLjUwMjM1IDI5LjUzOCA0Ljc2NDY0IDI4LjI2MTggNS4xMDg4MUMyOC4wNjc1IDUuMTYxMiAyNy44Njg1IDUuMTk2NjggMjcuNjY1MyA1LjE5NTY5QzI3LjUzOCA1LjE5NTAyIDI3LjQxMDYgNS4xOTczNCAyNy4yODM3IDUuMTk3MzRDMjIuODM5NiA1LjE5NzM0IDE4LjM5NTYgNS4xOTczNSAxMy45NTE4IDUuMTk3NjhDMTMuODI0NSA1LjE5NzY4IDEzLjY5NzUgNS4yIDEzLjU3MDIgNS4yMDQ2NEMxMy41MTI1IDUuMjA2NjMgMTMuNDcxNyA1LjI0MzQzIDEzLjQ0MzkgNS4yOTAxOEMxMy4zMDI5IDUuNTI4NTggMTMuMzk2OCA1Ljc4NjU1IDEzLjU1NzYgNS45MjI0OUMxMy42ODQzIDYuMDI5MjYgMTMuODMyOCA2LjA4MDMyIDEzLjk5NTMgNi4wOTAyNkMxNC4xMTE3IDYuMDk3MjMgMTQuMjI4NCA2LjA5MzkxIDE0LjM0NTEgNi4wOTM5MUMxNy42NjQ4IDYuMDkzOTEgMjAuOTg0NSA2LjA5MzkxIDI0LjMwNDIgNi4wOTM5MUwzNC4xNjc3IDYuMDkzOTFMMzQuMTY4MSA2LjA5NTI0WiIgZmlsbD0id2hpdGUiLz4KPHBhdGggZD0iTTAuMzgwMzExIDE3LjgxNEMwLjM0NzQ4NiAxNS42MzUyIDIuMTEyMTEgMTMuNDI0MyA0LjgyMjA0IDEzLjM4NDJDNy40MzU0OCAxMy40MTU0IDkuMjk0NiAxNS41MTk5IDkuMjc5NjggMTcuODdDOS4yNjUwOSAyMC4yMDUzIDcuNDAzOTggMjIuMjY4MyA0LjgyOTMzIDIyLjI5ODhDMi4xMjYzNyAyMi4yNjgzIDAuMzIxMjkyIDIwLjA0NzggMC4zODAzMTEgMTcuODE0WiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+Cg==" alt="Linktree">
+      <p class="credit">created by denji.bond</p>
+    </div>
   </footer>
-<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a345a75aaf6455c9',t:'MTc4ODI4MDE2NQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+  <script>
+    document.querySelectorAll('.share-btn').forEach(function (btn) {
+      btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var a = btn.closest('a');
+        var url = a ? a.href : location.href;
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(url).then(function () {
+            var prev = btn.innerHTML;
+            btn.style.opacity = '1';
+            btn.innerHTML = '&#10003;';
+            setTimeout(function () { btn.innerHTML = prev; }, 1200);
+          }).catch(function () {});
+        }
+      });
+    });
+    document.addEventListener('contextmenu', function (e) { if (!e.target.closest('.share-btn')) e.preventDefault(); });
+    document.addEventListener('selectstart', function (e) { e.preventDefault(); });
+    document.addEventListener('copy', function (e) { if (!e.target.closest('.share-btn')) e.preventDefault(); });
+    document.addEventListener('cut', function (e) { e.preventDefault(); });
+  </script>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a345b9578cf6a38e',t:'MTc4ODI4MDkwMg=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
